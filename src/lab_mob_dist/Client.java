@@ -23,6 +23,7 @@ public class Client {
             if(group.isMulticastAddress()){
                 out.writeUTF("create:" + groupIp);
                 System.out.println("Group " + groupIp + " has been created");
+                listChatRooms();
                 return;
             }
             System.out.println(groupIp + " isn't a valid Multicast IP");
@@ -56,7 +57,9 @@ public class Client {
                 System.out.println("Inform you name: ");
                 String name = scan.nextLine();
                 out.writeUTF("join:" + name + ":" + groupIp);
-                System.out.println("Group: " + groupIp);
+                System.out.println("Group: " + groupIp + "\n" +
+                        "Commands: \n Write 'exit group' to leave this group \n " +
+                        "Write 'list members' to see who's in this chatRoom");
 
                 chatRoom.joinChatRoom(name, groupIp);
                 chatRoom.showMessages();
@@ -110,7 +113,7 @@ public class Client {
         Client client = new Client();
         while(true){
             Scanner scan = new Scanner(System.in);
-            System.out.println("Select the desired option: 1 - Create a chat room | 2 - Join a chat room" +
+            System.out.println("Write the number of the desired option: 1 - Create a chat room | 2 - Join a chat room" +
                     " | 3 - List chat rooms | 4 - Shut down");
             Integer menu = scan.nextInt();
 
